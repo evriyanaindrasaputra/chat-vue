@@ -10,6 +10,7 @@ module.exports = {
         Lato: ['Lato', 'sans-serif'],
       },
       colors: {
+        'light': '#F2F2F2',
         'primary-one': '#2F80ED',
         'primary-two': '#4F4F4F',
         'primary-three': '#828282',

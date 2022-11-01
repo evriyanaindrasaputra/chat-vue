@@ -38,11 +38,11 @@ export default defineComponent({
     const classNames = computed(() => {
       const result: string[] = ['btn']
 
-      if (props.color)
-        result.push(`btn--${props.color}`)
-
       if (props.variant)
         result.push(`btn--${props.variant}`)
+
+      if (props.color)
+        result.push(`btn--${props.color}`)
 
       if (props.size)
         result.push(`btn--${props.size}`)
@@ -72,39 +72,67 @@ export default defineComponent({
 
 <style lang="postcss">
 .btn {
-  @apply inline-flex font-medium disabled:opacity-50 disabled:pointer-events-none;
+  @apply inline-flex font-medium disabled:opacity-50 disabled:pointer-events-none ;
 
   > svg {
-    @apply self-baseline;
+    @apply self-center;
   }
 
   /*
   * Button has 4 different sizing
-  * eg: xs, sm, md, and lg
+  * eg: sm, md, and lg
   */
 
   &--sm {
-    @apply px-4 py-2 gap-2 text-base rounded-sm;
+    @apply px-3 py-2 gap-2 text-base rounded-sm;
   }
 
   &--md {
-    @apply px-5 py-3 gap-3 text-base rounded;
+    @apply px-4 py-2 gap-[10px] text-base rounded-[5px];
   }
 
   &--lg {
     @apply px-8 py-5 gap-4 text-base rounded;
   }
 
-  /*
-  * Button solid is the
-  * default style variant
-  */
   &--solid {
     @apply border border-solid hover:shadow-lg focus:shadow-none active:shadow-none text-white;
-
+    > svg > path {
+      @apply fill-white
+    }
     &.btn {
       &--primary {
-        @apply bg-blue-500 hover:bg-blue-700 focus:bg-blue-800 active:bg-blue-800;
+        @apply bg-primary-one hover:bg-primary-one/90 focus:bg-primary-one/70 active:bg-primary-one/80;
+      }
+      &--indicator {
+        @apply bg-indicator-one hover:bg-indicator-one/90 focus:bg-indicator-one/70 active:bg-indicator-one/80;
+      }
+      &--indicator-two {
+        @apply bg-indicator-two hover:bg-indicator-two/90 focus:bg-indicator-two/70 active:bg-indicator-two/80;
+      }
+    }
+  }
+
+  &--light {
+    @apply border border-solid hover:shadow-lg focus:shadow-none active:shadow-none bg-light;
+    &.btn {
+      &--primary {
+        @apply text-primary-one hover:text-primary-one/90 focus:text-primary-one/70 active:text-primary-one/80;
+        > svg > path {
+          @apply fill-primary-one
+        }
+      }
+      &--indicator {
+        @apply text-indicator-one hover:text-indicator-one/90 focus:text-indicator-one/70 active:text-indicator-one/80;
+        > svg > path {
+          @apply fill-indicator-one
+        }
+      }
+      &--indicator-two {
+        @apply text-indicator-two hover:text-indicator-two/90 focus:text-indicator-two/70 active:text-indicator-two/80;
+        > svg > path {
+          @apply fill-indicator-two
+        }
       }
     }
   }
