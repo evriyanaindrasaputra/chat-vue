@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        Lato: ['Lato', 'sans-serif'],
+      },
       colors: {
         'primary-one': '#2F80ED',
         'primary-two': '#4F4F4F',
