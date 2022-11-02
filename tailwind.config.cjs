@@ -35,16 +35,14 @@ module.exports = {
       },
       keyframes: {
         'come-in': {
-          '0%': { opacity: '0', transform: 'translateX(15px) scale(0)' },
-          '25%': { transform: 'translateX(10px) scale(0.2)' },
+          '0%': { opacity: '0', transform: 'translateX(15px) ' },
           '50%': { transform: 'translateX(5px)' },
-          '75%': { transform: 'translateX(2px) scale(0.8)' },
-          '100%': { transform: 'translateX(0px) scale(1)', opacity: '1' },
+          '100%': { transform: 'translateX(0px) ', opacity: '1' },
         },
 
       },
       animation: {
-        'come-in': 'come-in 1s linear',
+        'come-in': 'come-in 0.5s linear',
       },
     },
   },

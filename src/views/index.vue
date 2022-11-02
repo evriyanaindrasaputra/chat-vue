@@ -1,61 +1,89 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import LightningIcon from '../components/Icons/LightningIcon.vue'
 import IButton from '~/components/Button/IButton.vue'
 import Layout from '~/components/Layout/Layout.vue'
 import QAIcon from '~/components/Icons/QAIcon.vue'
 import ReaderIcon from '~/components/Icons/ReaderIcon.vue'
 
+type MenuType = 'Task' | 'Inbox' | 'Menu'
+
+const menuIcon = {
+  Task: ReaderIcon,
+  Inbox: QAIcon,
+  Menu: LightningIcon,
+}
+
 const isClicked = ref<boolean>(false)
+const selectedMenu = ref<MenuType>('Menu')
 
 const handleClick = () => {
+  selectedMenu.value = 'Menu'
   isClicked.value = !isClicked.value
 }
+const selectMenu = (val: MenuType) => {
+  selectedMenu.value = val
+}
+
+const selectedIcon = computed(() => {
+  return menuIcon[selectedMenu.value]
+})
 </script>
 
 <template>
   <Layout>
     <h1 class="text-3xl font-bold text-green-200 underline font-Lato">
-      Hello world! wqw asds ssss asdsd sassss
+      Hello world!
     </h1>
     <!-- container for floating IButton -->
     <div
-      class="fixed bottom-7 bg-red-500 right-5 flex flex-row-reverse items-center"
+      class="fixed bottom-7 bg-transparent right-5 flex flex-row-reverse items-end"
     >
       <IButton
         class="ml-2"
-        icon pill variant="solid" color="primary"
+        icon pill
+        variant="solid"
+        color="indicator-two"
         @click="handleClick"
       >
-        <LightningIcon class="w-4 h-4" />
+        <component
+          :is="selectedIcon" class="w-4 h-4"
+        />
       </IButton>
       <!-- Element show / hide -->
       <ul
         class="relative space-x-2 "
         :class="[isClicked ? 'flex' : 'hidden']"
       >
-        <li>
+        <li
+          v-if="selectedMenu !== 'Task'"
+          class="flex flex-col items-center"
+          :class="[isClicked ? 'animate-come-in' : '']"
+        >
+          <span class="text-light mb-1 text-sm">Task</span>
           <IButton
-            :class="[isClicked ? 'animate-come-in' : '']" icon pill variant="light" color="indicator-two"
-          >
-            <QAIcon class="w-4 h-4" />
-          </IButton>
-        </li>
-        <li>
-          <IButton
-            :class="[isClicked ? 'animate-come-in' : '']" icon pill variant="light" color="indicator-two"
+            icon
+            pill variant="light" color="indicator-two"
+            @click="selectMenu('Task')"
           >
             <ReaderIcon class="w-4 h-4" />
           </IButton>
         </li>
+        <li
+          v-if="selectedMenu !== 'Inbox'"
+          class="flex flex-col items-center"
+          :class="[isClicked ? 'animate-come-in' : '']"
+        >
+          <span class=" text-light mb-1 text-sm">Inbox</span>
+          <IButton
+            icon pill variant="light" color="indicator-two"
+            @click="selectMenu('Inbox')"
+          >
+            <QAIcon class="w-4 h-4" />
+          </IButton>
+        </li>
       </ul>
     </div>
-    <!-- <IButton class="absolute bottom-7 right-5" icon pill variant="solid" color="primary">
-      <AddIcon class="w-5 h-5" />
-    </IButton> -->
-    <IButton icon pill variant="light" color="indicator-two">
-      <AddIcon class="w-5 h-5" />
-    </IButton>
   </Layout>
 </template>
 
