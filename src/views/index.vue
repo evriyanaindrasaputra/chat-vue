@@ -7,6 +7,7 @@ import QAIcon from '~/components/Icons/QAIcon.vue'
 import ReaderIcon from '~/components/Icons/ReaderIcon.vue'
 import Search from '~/components/Search/Search.vue'
 import Discuss from '~/components/Discuss/Discuss.vue'
+import DiscussionHeader from '~/components/DiscussionHeader/DiscussionHeader.vue'
 import ContainerDiscuss from '~/components/ContainerDiscuss/ContainerDiscuss.vue'
 
 type MenuType = 'Task' | 'Inbox' | 'Menu'
@@ -61,9 +62,7 @@ const closeDiscuss = () => {
     <!-- container for floating IButton -->
     <ContainerMenu>
       <template v-if="discuss.isDiscuss">
-        <button @click="closeDiscuss">
-          x
-        </button>
+        <DiscussionHeader @backDiscuss="closeDiscuss" />
       </template>
       <template v-else>
         <Search />

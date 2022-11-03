@@ -21,7 +21,7 @@ const handleDiscuss = () => { emit('changeDiscuss', props.id) }
     <!-- description -->
     <div class="w-full">
       <!-- header -->
-      <div class="flex font-semibold text-md leading-tight items-start">
+      <div class="flex font-semibold text-base leading-tight items-start">
         <span
           :id="id.toString"
           class=" text-primary-one mr-1 cursor-pointer"
@@ -32,7 +32,7 @@ const handleDiscuss = () => { emit('changeDiscuss', props.id) }
         <span class="flex-shrink-0 font-normal text-gray-500">02/06/2021 10:45</span>
       </div>
       <!-- sender -->
-      <p class="font-semibold">
+      <p class="font-semibold text-sm">
         Cameron Phillips :
       </p>
       <!-- message -->
