@@ -13,8 +13,10 @@ const emit = defineEmits(['backDiscuss'])
         <ArrowBackIcon class="w-4 h-4 " fill="fill-black" />
       </button>
       <div class="items-start flex-1 leading-tight text-base font-semibold">
-        <span class="text-primary-one">I-589 - AMARKHIL, Obaidullah [Affirmative Filing with ZHN]</span>
-        <span class=" text-sm text-gray-700">3 Participants</span>
+        <p class="text-primary-one">
+          I-589 - AMARKHIL, Obaidullah [Affirmative Filing with ZHN]
+        </p>
+        <span class="font-medium text-sm text-gray-700">3 Participants</span>
       </div>
       <button>
         <CloseIcon class="w-4 h-4 " fill="fill-black" />
