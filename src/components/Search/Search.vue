@@ -3,7 +3,7 @@ import SearchIcon from '../Icons/SearchIcon.vue'
 </script>
 
 <template>
-  <form>
+  <form class="px-8">
     <div class="relative">
       <input
         type="text"

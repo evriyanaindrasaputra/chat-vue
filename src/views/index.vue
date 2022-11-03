@@ -6,6 +6,8 @@ import Layout from '~/components/Layout/Layout.vue'
 import QAIcon from '~/components/Icons/QAIcon.vue'
 import ReaderIcon from '~/components/Icons/ReaderIcon.vue'
 import Search from '~/components/Search/Search.vue'
+import Discuss from '~/components/Discuss/Discuss.vue'
+import ContainerDiscuss from '~/components/ContainerDiscuss/ContainerDiscuss.vue'
 
 type MenuType = 'Task' | 'Inbox' | 'Menu'
 
@@ -15,7 +17,7 @@ const menuIcon = {
   Menu: LightningIcon,
 }
 
-const ChatContainer = defineAsyncComponent(() => import('~/components/Chat/Chat.vue'))
+const ContainerMenu = defineAsyncComponent(() => import('~/components/ContainerMenu/ContainerMenu.vue'))
 
 const isClicked = ref<boolean>(false)
 const selectedMenu = ref<MenuType>('Menu')
@@ -39,9 +41,15 @@ const selectedIcon = computed(() => {
       Hello world!
     </h1>
     <!-- container for floating IButton -->
-    <ChatContainer>
+    <ContainerMenu>
       <Search />
-    </ChatContainer>
+      <ContainerDiscuss>
+        <Discuss />
+        <Discuss />
+        <Discuss />
+        <Discuss />
+      </ContainerDiscuss>
+    </ContainerMenu>
     <div
       class="fixed bottom-7 bg-transparent right-5 flex flex-row-reverse items-end"
     >
