@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, ref } from 'vue'
+import { computed, defineAsyncComponent, reactive, ref } from 'vue'
 import LightningIcon from '../components/Icons/LightningIcon.vue'
 import IButton from '~/components/Button/IButton.vue'
 import Layout from '~/components/Layout/Layout.vue'
@@ -10,6 +10,10 @@ import Discuss from '~/components/Discuss/Discuss.vue'
 import ContainerDiscuss from '~/components/ContainerDiscuss/ContainerDiscuss.vue'
 
 type MenuType = 'Task' | 'Inbox' | 'Menu'
+interface DiscussType {
+  isDiscuss: boolean
+  id: number
+}
 
 const menuIcon = {
   Task: ReaderIcon,
@@ -33,6 +37,20 @@ const selectMenu = (val: MenuType) => {
 const selectedIcon = computed(() => {
   return menuIcon[selectedMenu.value]
 })
+
+const discuss = reactive<DiscussType>({
+  id: 0,
+  isDiscuss: false,
+})
+
+const selectedDiscuss = (id: number) => {
+  discuss.id = id
+  discuss.isDiscuss = true
+}
+const closeDiscuss = () => {
+  discuss.id = 0
+  discuss.isDiscuss = false
+}
 </script>
 
 <template>
@@ -42,12 +60,25 @@ const selectedIcon = computed(() => {
     </h1>
     <!-- container for floating IButton -->
     <ContainerMenu>
-      <Search />
+      <template v-if="discuss.isDiscuss">
+        <button @click="closeDiscuss">
+          x
+        </button>
+      </template>
+      <template v-else>
+        <Search />
+      </template>
       <ContainerDiscuss>
-        <Discuss />
-        <Discuss />
-        <Discuss />
-        <Discuss />
+        <template v-if="discuss.isDiscuss">
+          <Discuss :id="1" @changeDiscuss="selectedDiscuss" />
+        </template>
+        <template v-else>
+          <Discuss :id="1" @changeDiscuss="selectedDiscuss" />
+          <Discuss :id="2" @changeDiscuss="selectedDiscuss" />
+          <Discuss :id="3" @changeDiscuss="selectedDiscuss" />
+          <Discuss :id="4" @changeDiscuss="selectedDiscuss" />
+          <Discuss :id="5" @changeDiscuss="selectedDiscuss" />
+        </template>
       </ContainerDiscuss>
     </ContainerMenu>
     <div

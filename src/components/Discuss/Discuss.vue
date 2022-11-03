@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import IButton from '../Button/IButton.vue'
 import PersonIcon from '../Icons/PersonIcon.vue'
+
+const props = defineProps<{
+  id: number
+}>()
+
+// emit discuss id to parent
+const emit = defineEmits(['changeDiscuss'])
+
+const handleDiscuss = () => { emit('changeDiscuss', props.id) }
 </script>
 
 <template>
@@ -13,7 +22,13 @@ import PersonIcon from '../Icons/PersonIcon.vue'
     <div class="w-full">
       <!-- header -->
       <div class="flex font-semibold text-md leading-tight items-start">
-        <span class=" text-primary-one mr-1">Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]</span>
+        <span
+          :id="id.toString"
+          class=" text-primary-one mr-1 cursor-pointer"
+          @click="handleDiscuss"
+        >
+          Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]
+        </span>
         <span class="flex-shrink-0 font-normal text-gray-500">02/06/2021 10:45</span>
       </div>
       <!-- sender -->
