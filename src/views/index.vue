@@ -10,6 +10,7 @@ import Discuss from '~/components/Discuss/Discuss.vue'
 import DiscussionHeader from '~/components/DiscussionHeader/DiscussionHeader.vue'
 import ContainerDiscuss from '~/components/ContainerDiscuss/ContainerDiscuss.vue'
 import MoreHorizIcon from '~/components/Icons/MoreHorizIcon.vue'
+import Typebar from '~/components/Typebar/Typebar.vue'
 
 type MenuType = 'Task' | 'Inbox' | 'Menu'
 interface DiscussType {
@@ -196,6 +197,7 @@ const closeDiscuss = () => {
           <Discuss :id="5" @changeDiscuss="selectedDiscuss" />
         </template>
       </ContainerDiscuss>
+      <Typebar v-if="discuss.isDiscuss" />
     </ContainerMenu>
     <div
       class="fixed bottom-7 bg-transparent right-5 flex flex-row-reverse items-end"
