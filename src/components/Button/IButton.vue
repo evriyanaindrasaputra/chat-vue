@@ -96,40 +96,40 @@ export default defineComponent({
   }
 
   &--solid {
-    @apply border border-solid hover:shadow-lg focus:shadow-none active:shadow-none text-white;
+    @apply border border-solid hover:shadow-lg   text-white;
     > svg > path {
       @apply fill-white
     }
     &.btn {
       &--primary {
-        @apply bg-primary-one hover:bg-primary-one/90 focus:bg-primary-one/70 active:bg-primary-one/80;
+        @apply bg-primary-one hover:bg-primary-one/90 ;
       }
       &--indicator {
-        @apply bg-indicator-one hover:bg-indicator-one/90 focus:bg-indicator-one/70 active:bg-indicator-one/80;
+        @apply bg-indicator-one hover:bg-indicator-one/90 ;
       }
       &--indicator-two {
-        @apply bg-indicator-two hover:bg-indicator-two/90 focus:bg-indicator-two/70 active:bg-indicator-two/80;
+        @apply bg-indicator-two hover:bg-indicator-two/90 ;
       }
     }
   }
 
   &--light {
-    @apply border border-solid hover:shadow-lg focus:shadow-none active:shadow-none bg-light;
+    @apply border border-solid hover:shadow-lg   bg-light;
     &.btn {
       &--primary {
-        @apply text-primary-one hover:text-primary-one/90 focus:text-primary-one/70 active:text-primary-one/80;
+        @apply text-primary-one hover:text-primary-one/90 ;
         > svg > path {
           @apply fill-primary-one
         }
       }
       &--indicator {
-        @apply text-indicator-one hover:text-indicator-one/90 focus:text-indicator-one/70 active:text-indicator-one/80;
+        @apply text-indicator-one hover:text-indicator-one/90 ;
         > svg > path {
           @apply fill-indicator-one
         }
       }
       &--indicator-two {
-        @apply text-indicator-two hover:text-indicator-two/90 focus:text-indicator-two/70 active:text-indicator-two/80;
+        @apply text-indicator-two hover:text-indicator-two/90 ;
         > svg > path {
           @apply fill-indicator-two
         }

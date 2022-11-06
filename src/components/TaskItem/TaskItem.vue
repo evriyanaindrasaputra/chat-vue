@@ -17,6 +17,7 @@ import BookmarksIcon from '../Icons/BookmarksIcon.vue'
 import MoreHorizIcon from '../Icons/MoreHorizIcon.vue'
 import TaskItemHeader from './TaskItemHeader.vue'
 import TaskItemDetailWrapper from './TaskItemDetailWrapper.vue'
+import TaskItemDescription from './TaskItemDescription.vue'
 
 interface TaksItem {
   date: string
@@ -39,18 +40,16 @@ const bookmarkList: Array<Bookmark> = [
 ]
 
 const taksItem = reactive<TaksItem>({
-  date: '',
-  description: '',
+  date: '12/06/2021',
+  description: 'Homeworks needed to be checked are as follows : Client Profile Questionnaire, Passport Requirements and Images, Personal Documents.',
   bookmarks: [
     bookmarkList[0],
   ],
 })
-
 const format = (date: any) => {
   const day = date.getDate()
   const month = date.getMonth() + 1
   const year = date.getFullYear()
-
   return `${day}/${month}/${year}`
 }
 </script>
@@ -72,17 +71,9 @@ const format = (date: any) => {
             <ClockIcon :class="taksItem.date ? 'text-primary-one' : 'text-gray-600'" class=" w-5 h-5" />
             <Datepicker v-model="taksItem.date" :esc-close="true" :format="format" auto-apply position="right" placeholder="Select Date" />
           </TaskItemDetailWrapper>
-          <TaskItemDetailWrapper>
-            <PencilIcon
-              class="w-5 h-5"
-              :class="[taksItem.description.trim() ? 'text-primary-one' : 'text-gray-600']"
-            />
-            <textarea
-              v-model="taksItem.description"
-              className="rounded-[5px] border border-secondary w-full"
-              rows="4"
-            />
-          </TaskItemDetailWrapper>
+          <TaskItemDescription
+            :initial-description="taksItem.description"
+          />
           <TaskItemDetailWrapper>
             <BookmarksIcon
               class="w-5 h-5 "
@@ -110,15 +101,15 @@ const format = (date: any) => {
                     v-slot="{ selected }"
                     class="absolute z-10 mt-1 max-h-60 w-56 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                   >
-                    <ListboxOption v-for="item in bookmarkList" :key="item.label" :value="item">
+                    <ListboxOption v-for="item in bookmarkList" :key="item.label" class="p-2 space-y-2" :value="item">
                       <li
-                        class="relative cursor-default select-none py-2 pl-10 pr-4"
+                        class="relative rounded cursor-default select-none py-2 pl-10 pr-4"
                         :class="[
                           item.background,
                         ]"
                       >
                         <span
-                          class="block truncate"
+                          class="block text-sm truncate"
                           :class="[
                             selected ? 'font-medium' : 'font-normal',
                           ]"

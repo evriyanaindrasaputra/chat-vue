@@ -45,7 +45,7 @@ onMounted(() => {
     </template>
     <ContainerBox>
       <template v-if="isLoading">
-        <Loading text="hallo" />
+        <Loading text="Loading Chats ..." />
       </template>
       <template v-else>
         <template v-if="discuss.isDiscuss">
