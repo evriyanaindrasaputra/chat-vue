@@ -6,8 +6,10 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
 import IButton from '../Button/IButton.vue'
+import { useTask } from '~/composables/task'
+const { addNewTask } = useTask()
 
 const categories = [
   { name: 'My Task' },
@@ -16,6 +18,15 @@ const categories = [
 ]
 
 const selectedCategory = ref(categories[0])
+
+const handleClick = () => {
+  const element = document.querySelector('#list-task')
+
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    addNewTask()
+  }
+}
 </script>
 
 <template>
@@ -77,7 +88,7 @@ const selectedCategory = ref(categories[0])
         </div>
       </Listbox>
     </div>
-    <IButton>
+    <IButton @click="handleClick">
       New Task
     </IButton>
   </div>

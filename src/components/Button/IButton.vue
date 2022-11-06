@@ -110,6 +110,9 @@ export default defineComponent({
       &--indicator-two {
         @apply bg-indicator-two hover:bg-indicator-two/90 ;
       }
+      &--secondary {
+        @apply bg-primary-three
+      }
     }
   }
 

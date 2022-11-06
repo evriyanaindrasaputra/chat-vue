@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import {
   Disclosure, DisclosureButton,
   DisclosurePanel,
   Listbox,
-  ListboxButton, ListboxOption, ListboxOptions, Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+  Menu, MenuButton, MenuItem, MenuItems,
 } from '@headlessui/vue'
 import { ChevronUpIcon } from '@heroicons/vue/20/solid'
-import { ClockIcon, PencilIcon } from '@heroicons/vue/24/outline'
+import { ClockIcon } from '@heroicons/vue/24/outline'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import BookmarksIcon from '../Icons/BookmarksIcon.vue'
@@ -18,47 +18,17 @@ import MoreHorizIcon from '../Icons/MoreHorizIcon.vue'
 import TaskItemHeader from './TaskItemHeader.vue'
 import TaskItemDetailWrapper from './TaskItemDetailWrapper.vue'
 import TaskItemDescription from './TaskItemDescription.vue'
-
-interface TaksItem {
-  date: string
-  description: string
-  bookmarks: Array<Bookmark>
-}
-interface Bookmark {
-  label: string
-  background: string
-}
-const bookmarkList: Array<Bookmark> = [
-  { label: 'Important ASAP', background: 'bg-sticker-one' },
-  { label: 'Offline Meeting', background: 'bg-sticker-two' },
-  { label: 'Virtual Meeting', background: 'bg-sticker-three' },
-  { label: 'ASAP', background: 'bg-sticker-four' },
-  { label: 'Client Related', background: 'bg-sticker-five' },
-  { label: 'Self Task', background: 'bg-sticker-six' },
-  { label: 'Appointments', background: 'bg-sticker-seven' },
-  { label: 'Court Related', background: 'bg-[#9DD0ED]' },
-]
-
-const taksItem = reactive<TaksItem>({
-  date: '12/06/2021',
-  description: 'Homeworks needed to be checked are as follows : Client Profile Questionnaire, Passport Requirements and Images, Personal Documents.',
-  bookmarks: [
-    bookmarkList[0],
-  ],
-})
-const format = (date: any) => {
-  const day = date.getDate()
-  const month = date.getMonth() + 1
-  const year = date.getFullYear()
-  return `${day}/${month}/${year}`
-}
+import { bookmarkList } from '~/composables/task'
+import { formatDate } from '~/composables/utils'
+const { taskItem } = defineProps(['taskItem'])
+const TaskItem = ref(taskItem)
 </script>
 
 <template>
   <div class="flex w-full item-start py-[22px] ">
-    <Disclosure v-slot="{ open }">
+    <Disclosure v-slot="{ open }" default-open>
       <div class="flex-1 flex-col h-full">
-        <TaskItemHeader>
+        <TaskItemHeader :title="TaskItem.title" :done="TaskItem.done">
           <DisclosureButton>
             <ChevronUpIcon
               :class="open ? 'rotate-180 transform' : ''"
@@ -68,23 +38,30 @@ const format = (date: any) => {
         </TaskItemHeader>
         <DisclosurePanel class="px-2 mt-4 flex flex-col space-y-4">
           <TaskItemDetailWrapper>
-            <ClockIcon :class="taksItem.date ? 'text-primary-one' : 'text-gray-600'" class=" w-5 h-5" />
-            <Datepicker v-model="taksItem.date" :esc-close="true" :format="format" auto-apply position="right" placeholder="Select Date" />
+            <ClockIcon :class="TaskItem.date ? 'text-primary-one' : 'text-gray-600'" class=" w-5 h-5" />
+            <Datepicker
+              v-model="TaskItem.date"
+              :esc-close="true"
+              :format="formatDate"
+              auto-apply
+              position="right"
+              placeholder="Select Date"
+            />
           </TaskItemDetailWrapper>
           <TaskItemDescription
-            :initial-description="taksItem.description"
+            :initial-description="taskItem.description"
           />
           <TaskItemDetailWrapper>
             <BookmarksIcon
               class="w-5 h-5 "
               fill="fill-primary-one"
             />
-            <Listbox v-model="taksItem.bookmarks" multiple>
+            <Listbox v-model="TaskItem.bookmarks" multiple>
               <div class="relative">
                 <ListboxButton class="flex w-full flex-wrap gap-3">
-                  <span v-if="taksItem.bookmarks.length <= 0">No Bookmark</span>
+                  <span v-if="TaskItem.bookmarks.length <= 0">No Bookmark</span>
                   <button
-                    v-for="item in taksItem.bookmarks"
+                    v-for="item in TaskItem.bookmarks"
                     :key="item.label"
                     class="rounded px-2 py-1 text-sm"
                     :class="[item.background]"

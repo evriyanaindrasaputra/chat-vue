@@ -3,10 +3,19 @@ import { ref } from 'vue'
 import { Switch } from '@headlessui/vue'
 import CheckboxIcon from '../Icons/CheckboxIcon.vue'
 import CheckboxOutlineIcon from '../Icons/CheckboxOutlineIcon.vue'
-
-const isDone = ref(true)
+const { title, done } = defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  done: {
+    type: Boolean,
+    required: true,
+  },
+})
+const Title = ref(title)
+const isDone = ref(done)
 const isEdit = ref<boolean>(false)
-const title = ref<string>('Cross-reference with Jeanne for Case #192813')
 
 const handleEdit = () => isEdit.value = !isEdit.value
 </script>
@@ -28,11 +37,11 @@ const handleEdit = () => isEdit.value = !isEdit.value
         :class="[isDone ? 'line-through' : '']"
         @dblclick="handleEdit"
       >
-        {{ title }}
+        {{ Title.trim() ? Title : 'No Title' }}
       </p>
       <input
         v-else
-        v-model="title"
+        v-model="Title"
         type="text"
         class="rounded-[5px] border border-secondary w-full"
         placeholder="Type Task Title"
