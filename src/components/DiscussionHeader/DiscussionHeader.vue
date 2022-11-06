@@ -8,7 +8,7 @@ const emit = defineEmits(['backDiscuss'])
 
 <template>
   <div>
-    <div class="flex items-center px-8 pb-6 space-x-3">
+    <div class="flex items-center px-8 pb-4 space-x-3">
       <button @click="emit('backDiscuss')">
         <ArrowBackIcon class="w-4 h-4 " fill="fill-black" />
       </button>
@@ -16,7 +16,7 @@ const emit = defineEmits(['backDiscuss'])
         <p class="text-primary-one">
           I-589 - AMARKHIL, Obaidullah [Affirmative Filing with ZHN]
         </p>
-        <span class="font-medium text-sm text-gray-700">3 Participants</span>
+        <span class="font-medium text-xs text-gray-700">3 Participants</span>
       </div>
       <button>
         <CloseIcon class="w-4 h-4 " fill="fill-black" />

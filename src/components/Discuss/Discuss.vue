@@ -13,7 +13,7 @@ const handleDiscuss = () => { emit('changeDiscuss', props.id) }
 </script>
 
 <template>
-  <div class="flex py-[22px] space-x-[17px] border-b border-gray-400">
+  <div class="flex py-[22px] space-x-[17px]">
     <!-- avatar -->
     <IButton class="self-start" pill icon>
       <PersonIcon class="w-4 h-4" />
