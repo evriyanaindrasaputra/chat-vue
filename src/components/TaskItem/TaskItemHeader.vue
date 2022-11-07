@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Switch } from '@headlessui/vue'
 import CheckboxIcon from '../Icons/CheckboxIcon.vue'
 import CheckboxOutlineIcon from '../Icons/CheckboxOutlineIcon.vue'
-const { title, done } = defineProps({
+const { title, done, date } = defineProps({
   title: {
     type: String,
     required: true,
@@ -12,8 +12,13 @@ const { title, done } = defineProps({
     type: Boolean,
     required: true,
   },
+  date: {
+    type: String || Date,
+    required: true,
+  },
 })
 const Title = ref(title)
+const dateTodo = ref(date)
 const isDone = ref(done)
 const isEdit = ref<boolean>(false)
 
@@ -51,7 +56,7 @@ const handleEdit = () => isEdit.value = !isEdit.value
     </div>
     <div class="flex-shrink-0 flex items-start gap-2 font-normal text-sm">
       <span v-if="!isDone" class=" text-indicator-three">2 Days Left</span>
-      <span class=" text-gray-500">12/06/20215</span>
+      <span class=" text-gray-500">{{ dateTodo }}</span>
       <slot />
     </div>
   </div>

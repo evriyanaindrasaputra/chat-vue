@@ -33,7 +33,7 @@ const selectMenu = (val: MenuType) => {
       Hello world!
     </h1>
     <!-- container for floating IButton -->
-    <ContainerMenu>
+    <ContainerMenu :menu="selectedMenu">
       <Inbox v-if="selectedMenu === 'Inbox'" />
       <Task v-if="selectedMenu === 'Task'" />
     </ContainerMenu>
@@ -52,7 +52,7 @@ const selectMenu = (val: MenuType) => {
           :color="selectedMenu !== 'Menu' ? 'secondary' : 'indicator-two'"
           @click="handleClick"
         >
-          <LightningIcon class="w-4 h-4" />
+          <LightningIcon class="w-6 h-6" />
         </IButton>
         <li
           class="absolute duration-500 transition-all ease-in-out bottom-0"
@@ -60,13 +60,19 @@ const selectMenu = (val: MenuType) => {
             : selectedMenu === 'Inbox' || (selectedMenu === 'Menu' && isOpen) ? ' right-24'
               : !isOpen && 'z-0 right-0'"
         >
-          <span v-if="selectedMenu !== 'Task' || !isOpen" class="text-light mb-1 text-sm">Task</span>
+          <template v-if="selectedMenu !== 'Menu' || isOpen ">
+            <p v-if="selectedMenu !== 'Task'" class="text-light text-center mb-1 text-sm">
+              Task
+            </p>
+          </template>
           <IButton
             icon
-            pill variant="light" color="indicator-two"
+            pill
+            :variant="selectedMenu === 'Task' ? 'solid' : 'light'"
+            color="indicator"
             @click="selectMenu('Task')"
           >
-            <ReaderIcon class="w-4 h-4" />
+            <ReaderIcon class="w-6 h-6" :fill="selectedMenu === 'Task' ? 'fill-white' : ''" />
           </IButton>
         </li>
         <li
@@ -76,12 +82,18 @@ const selectMenu = (val: MenuType) => {
               : !isOpen ? 'z-0 right-0'
                 : selectedMenu === 'Menu' && 'z-0 right-48'"
         >
-          <span v-if="selectedMenu !== 'Inbox' || !isOpen" class=" text-light mb-1 text-sm">Inbox</span>
+          <template v-if="isOpen || selectedMenu !== 'Menu'">
+            <p v-if="selectedMenu !== 'Inbox'" class=" text-light text-center mb-1 text-sm">
+              Inbox
+            </p>
+          </template>
           <IButton
-            icon pill variant="light" color="indicator-two"
+            icon pill
+            :variant="selectedMenu === 'Inbox' ? 'solid' : 'light'"
+            color="indicator-two"
             @click="selectMenu('Inbox')"
           >
-            <QAIcon class="w-4 h-4" />
+            <QAIcon class="w-6 h-6 " :fill="selectedMenu === 'Inbox' ? 'fill-white' : ''" />
           </IButton>
         </li>
       </ul>

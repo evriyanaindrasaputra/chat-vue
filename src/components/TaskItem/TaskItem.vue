@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import {
   Disclosure, DisclosureButton,
   DisclosurePanel,
@@ -18,9 +18,10 @@ import MoreHorizIcon from '../Icons/MoreHorizIcon.vue'
 import TaskItemHeader from './TaskItemHeader.vue'
 import TaskItemDetailWrapper from './TaskItemDetailWrapper.vue'
 import TaskItemDescription from './TaskItemDescription.vue'
-import { bookmarkList } from '~/composables/task'
+import { bookmarkList, useTask } from '~/composables/task'
 import { formatDate } from '~/composables/utils'
 const { taskItem } = defineProps(['taskItem'])
+const { deleteTask } = useTask()
 const TaskItem = ref(taskItem)
 </script>
 
@@ -28,7 +29,11 @@ const TaskItem = ref(taskItem)
   <div class="flex w-full item-start py-[22px] ">
     <Disclosure v-slot="{ open }" default-open>
       <div class="flex-1 flex-col h-full">
-        <TaskItemHeader :title="TaskItem.title" :done="TaskItem.done">
+        <TaskItemHeader
+          :title="TaskItem.title"
+          :date="TaskItem.date"
+          :done="TaskItem.done"
+        >
           <DisclosureButton>
             <ChevronUpIcon
               :class="open ? 'rotate-180 transform' : ''"
@@ -118,9 +123,10 @@ const TaskItem = ref(taskItem)
         >
           <MenuItem v-slot="{ active }">
             <button
-              class="group flex w-full items-center px-2 py-2 text-sm" :class="[
-                active ? ' bg-primary-one text-white' : ' text-primary-one',
-              ]"
+              class="group flex w-full items-center px-2 py-2 text-sm"
+              :class="[
+                active ? ' bg-indicator-three text-white' : ' text-indicator-three',
+              ]" @click="deleteTask(TaskItem.id)"
             >
               Delete
             </button>

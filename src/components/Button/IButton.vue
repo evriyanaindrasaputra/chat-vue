@@ -63,7 +63,6 @@ export default defineComponent({
 
 <template>
   <button
-    data-testid="btn"
     :class="classNames"
   >
     <slot />
@@ -84,11 +83,11 @@ export default defineComponent({
   */
 
   &--sm {
-    @apply px-3 py-2 gap-2 text-base rounded-sm;
+    @apply px-3 py-2 gap-2 text-base rounded-sm ;
   }
 
   &--md {
-    @apply px-4 py-2 gap-[10px] text-base rounded-[5px];
+    @apply px-4 py-2 gap-[10px] text-base rounded-[5px] ;
   }
 
   &--lg {
@@ -149,15 +148,15 @@ export default defineComponent({
     }
 
     &.btn--sm {
-      @apply p-2;
+      @apply p-2 ;
     }
 
     &.btn--md {
-      @apply p-3;
+      @apply p-4 w-[60px] h-[60px];
     }
 
     &.btn--lg {
-      @apply p-4;
+      @apply p-5;
     }
   }
 

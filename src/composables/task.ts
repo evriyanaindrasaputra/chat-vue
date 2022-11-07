@@ -57,6 +57,10 @@ export const useTask = createGlobalState(
       })
     }
 
-    return { listTask, addNewTask }
+    function deleteTask(id: number) {
+      listTask.value = listTask.value.filter(item => item.id !== id)
+    }
+
+    return { listTask, addNewTask, deleteTask }
   },
 )
