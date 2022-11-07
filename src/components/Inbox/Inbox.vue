@@ -7,6 +7,7 @@ import Typebar from '~/components/Typebar/Typebar.vue'
 import MessageList from '~/components/Message/MessageList.vue'
 import Search from '~/components/Search/Search.vue'
 import Loading from '~/components/Loading/Loading.vue'
+import { client } from '~/composables/fetch'
 
 interface DiscussType {
   isDiscuss: boolean
@@ -28,10 +29,19 @@ const closeDiscuss = () => {
 }
 
 const isLoading = ref<boolean>(true)
-onMounted(() => {
-  setTimeout(() => {
+
+const getData = async () => {
+  try {
+    await client.get('')
     isLoading.value = !isLoading.value
-  }, 1000)
+  }
+  catch (error) {
+    isLoading.value = !isLoading.value
+  }
+}
+
+onMounted(() => {
+  getData()
 })
 </script>
 

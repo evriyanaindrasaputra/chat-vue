@@ -4,12 +4,20 @@ import ContainerBox from '../ContainerBox/ContainerBox.vue'
 import TaskHeader from './TaskHeader.vue'
 import TaskList from './TaskList.vue'
 import Loading from '~/components/Loading/Loading.vue'
+import { client } from '~/composables/fetch'
 
 const isLoading = ref<boolean>(true)
-onMounted(() => {
-  setTimeout(() => {
+const getData = async () => {
+  try {
+    await client.get('')
     isLoading.value = !isLoading.value
-  }, 1000)
+  }
+  catch (error) {
+    isLoading.value = !isLoading.value
+  }
+}
+onMounted(() => {
+  getData()
 })
 </script>
 
