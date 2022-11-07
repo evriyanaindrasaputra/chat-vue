@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import IButton from '../Button/IButton.vue'
-import PersonIcon from '../Icons/PersonIcon.vue'
+import AvatarGroup from '../Avatar/AvatarGroup.vue'
 
 const props = defineProps<{
   id: number
@@ -15,9 +14,7 @@ const handleDiscuss = () => { emit('changeDiscuss', props.id) }
 <template>
   <div class="flex py-[22px] space-x-[17px]">
     <!-- avatar -->
-    <IButton class="self-start" pill icon>
-      <PersonIcon class="w-4 h-4" />
-    </IButton>
+    <AvatarGroup />
     <!-- description -->
     <div class="w-full">
       <!-- header -->
